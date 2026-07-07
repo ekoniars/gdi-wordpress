@@ -1,0 +1,40 @@
+# WordPress
+wp-config.php
+/wp-admin/
+/wp-includes/
+/wp-content/plugins/
+/wp-content/uploads/
+/wp-content/backup-*
+/wp-content/debug.log
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Docker volumes (data)
+db_data/
+wp_data/
+
+# Backups
+/backups/
+*.sql
+*.sql.gz
+*.wpress
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node (if using webpack, etc)
+node_modules/
+dist/
+build/
+
+# OS
+Thumbs.db

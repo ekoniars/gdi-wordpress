@@ -1,0 +1,55 @@
+<svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .code-text { font-family: "Courier New", monospace; font-size: 8px; fill: #9a97a0; opacity: 0.6; }
+      .logo-letter { font-family: Arial, sans-serif; font-size: 160px; font-weight: 900; fill: none; stroke: #d4af37; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .dot { fill: #d4af37; }
+      @keyframes flicker { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+      .code-text { animation: flicker 3s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <!-- Background glow -->
+  <circle cx="450" cy="140" r="320" fill="#d4af3708" filter="blur(30px)"/>
+
+  <!-- Letter G -->
+  <g id="g-letter">
+    <text x="60" y="180" class="logo-letter">G</text>
+    <text x="95" y="50" class="code-text">user.php</text>
+    <text x="110" y="65" class="code-text">&gt;Int</text>
+    <text x="130" y="80" class="code-text">cel</text>
+    <text x="75" y="130" class="code-text">com/me</text>
+    <text x="85" y="210" class="code-text">el=</text>
+  </g>
+
+  <!-- Dot 1 -->
+  <circle cx="255" cy="210" r="12" class="dot"/>
+
+  <!-- Letter D -->
+  <g id="d-letter">
+    <text x="300" y="180" class="logo-letter">D</text>
+    <text x="330" y="40" class="code-text">ages/new/</text>
+    <text x="350" y="60" class="code-text">tdj</text>
+    <text x="380" y="80" class="code-text">t&gt;&lt;</text>
+    <text x="330" y="110" class="code-text">h</text>
+    <text x="355" y="130" class="code-text">acc</text>
+    <text x="340" y="150" class="code-text">on"</text>
+    <text x="390" y="170" class="code-text">not</text>
+    <text x="330" y="190" class="code-text">&gt;&lt;span</text>
+    <text x="350" y="240" class="code-text">cl</text>
+  </g>
+
+  <!-- Dot 2 -->
+  <circle cx="550" cy="200" r="10" class="dot"/>
+
+  <!-- Letter I -->
+  <g id="i-letter">
+    <text x="590" y="180" class="logo-letter">I</text>
+    <text x="630" y="50" class="code-text">"m</text>
+    <text x="650" y="70" class="code-text">&lt;a</text>
+    <text x="665" y="90" class="code-text">bel</text>
+    <text x="650" y="150" class="code-text">e A</text>
+    <text x="670" y="170" class="code-text">s"</text>
+    <text x="640" y="220" class="code-text">lCd</text>
+  </g>
+</svg>

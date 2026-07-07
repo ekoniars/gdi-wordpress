@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.0/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "color": "#d4af37", "name": "Gold", "slug": "gold" },
+        { "color": "#f0d879", "name": "Gold Soft", "slug": "gold-soft" },
+        { "color": "#07070a", "name": "Background", "slug": "bg" },
+        { "color": "#0d0d13", "name": "Background 2", "slug": "bg2" },
+        { "color": "#e8e6e0", "name": "Text", "slug": "text" },
+        { "color": "#9a97a0", "name": "Muted", "slug": "muted" }
+      ]
+    }
+  }
+}
