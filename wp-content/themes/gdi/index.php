@@ -49,21 +49,21 @@
     <p class="section-sub reveal">במקום צוות שלם של ספקים ותיאומים — צוות אחד קטן שלוקח בעלות מקצה לקצה: מהארכיטקטורה ועד השיווק.</p>
     <div class="team-grid">
       <article class="card reveal">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/alon.jpg" alt="אלון גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/alon-3.jpg" alt="אלון גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">א</div>
         <h3>אלון גולדברג</h3>
         <div class="role">CTO</div>
         <p>13 שנים כבעלים טכני יחיד של פלטפורמת פרודקשן: ארכיטקטורה, QA אוטומטי בשש שכבות, DevOps, בסיסי נתונים ואבטחת מידע. מהנדס סניור אחד שמחליף צוות שלם — מוגבר ב־AI.</p>
       </article>
       <article class="card reveal">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/eitan-2.jpg" alt="איתן קונירסקי" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/eitan-4.jpg" alt="איתן קונירסקי" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">אק</div>
         <h3>איתן קונירסקי</h3>
         <div class="role">מנהל פיתוח עסקי ושיווק</div>
         <p>מחבר בין הטכנולוגיה לעסק: אסטרטגיה, שיווק ופיתוח עסקי שמייצרים הכנסות — קמפיינים, מנויים ואינטגרציות תשלום שמזיזים את המחוגים.</p>
       </article>
       <article class="card reveal">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/einav-3.jpg" alt="עינב גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/einav-4.jpg" alt="עינב גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">ע</div>
         <h3>עינב גולדברג</h3>
         <div class="role">מנהלת תפעול</div>
@@ -130,7 +130,7 @@
 </section>
 
 <footer class="site-footer">
-  <div class="wrap">G.D.I — Goldberg Development Instruction &copy; <?php echo date('Y'); ?> · alon77@gmail.com · linkedin.com/in/alon7</div>
+  <div class="wrap">G.D.I — Goldberg Development Instruction &copy; <?php echo date('Y'); ?></div>
 </footer>
 
 <script>

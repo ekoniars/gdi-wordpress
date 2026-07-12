@@ -1,0 +1,3 @@
+cd gdi.atwebpages.com
+get wp-config.php
+bye
