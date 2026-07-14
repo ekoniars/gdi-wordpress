@@ -149,7 +149,7 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
   display: grid; place-items: center; font-size: 2rem; font-weight: 900;
   background: radial-gradient(circle at 30% 30%, #2a2a38, #15151d);
   border: 2px solid #d4af3766; color: var(--gold-soft);
-  margin-block-end: 20px;
+  margin-block-end: 20px; margin-inline: auto;
   object-fit: cover; object-position: center;
 }
 .avatar[src] {
@@ -159,9 +159,14 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
 .card:nth-child(2) .avatar[src] {
   object-position: center 35%;
 }
+/* Avatar, name and role are centered; the bio paragraph stays right-aligned.
+   Centering a multi-line paragraph gives it a ragged start edge, and in RTL the
+   eye returns to the right edge on every line - if that edge moves, each line
+   has to be re-found. Short standalone lines have no such cost. */
+.card { text-align: center; }
 .card h3 { font-size: 1.35rem; }
 .card .role { color: var(--gold); font-weight: 700; margin-block: 4px 14px; }
-.card p { color: var(--muted); font-size: 0.98rem; }
+.card p { color: var(--muted); font-size: 0.98rem; text-align: start; }
 
 /* ---------- Services (two-up) ---------- */
 /* ponytail: reuses .cap card styling, only the track differs */
