@@ -27,12 +27,22 @@ BACKUP_DIR := backups
 STAMP := $(shell date +%Y-%m-%d_%H%M%S)
 DB := docker-compose exec -T db
 
+# A snapshot is only useful if the DB dump actually has content. Dump to a temp
+# dir first and only publish it once verified - a half-written snapshot that
+# looks valid is worse than no snapshot, since restore would wipe the live DB.
 backup:
-	@mkdir -p $(BACKUP_DIR)/$(STAMP)
-	@$(DB) mysqldump -u wordpress -pwordpress_password wordpress > $(BACKUP_DIR)/$(STAMP)/db.sql 2>/dev/null
-	@tar -czf $(BACKUP_DIR)/$(STAMP)/theme.tar.gz -C wp-content/themes gdi
-	@echo "✓ Backup created: $(BACKUP_DIR)/$(STAMP)"
-	@ls -lh $(BACKUP_DIR)/$(STAMP)
+	@docker info >/dev/null 2>&1 || { echo "❌ Docker isn't running. Start it (make up) and retry."; exit 1; }
+	@TMP=$(BACKUP_DIR)/.tmp-$(STAMP); \
+	mkdir -p $$TMP; \
+	trap 'rm -rf $$TMP' EXIT; \
+	$(DB) mysqldump -u wordpress -pwordpress_password wordpress > $$TMP/db.sql || \
+	  { echo "❌ mysqldump failed - is the db container up? (make up)"; exit 1; }; \
+	grep -q "CREATE TABLE" $$TMP/db.sql || \
+	  { echo "❌ Dump has no tables - refusing to save an empty backup."; exit 1; }; \
+	tar -czf $$TMP/theme.tar.gz -C wp-content/themes gdi || { echo "❌ Theme archive failed"; exit 1; }; \
+	mv $$TMP $(BACKUP_DIR)/$(STAMP); \
+	echo "✓ Backup created: $(BACKUP_DIR)/$(STAMP)"; \
+	ls -lh $(BACKUP_DIR)/$(STAMP)
 
 backups:
 	@echo "Available snapshots (newest last):"
@@ -41,12 +51,16 @@ backups:
 # B picks a snapshot by name; empty = latest
 B ?=
 restore:
+	@docker info >/dev/null 2>&1 || { echo "❌ Docker isn't running. Start it (make up) and retry."; exit 1; }
 	@BK="$(B)"; \
-	[ -n "$$BK" ] || BK=$$(ls -1 $(BACKUP_DIR) 2>/dev/null | tail -1); \
+	[ -n "$$BK" ] || BK=$$(ls -1 $(BACKUP_DIR) 2>/dev/null | grep -v '^\.' | tail -1); \
 	[ -n "$$BK" ] || { echo "❌ No backups found. Run: make backup"; exit 1; }; \
 	[ -f "$(BACKUP_DIR)/$$BK/db.sql" ] || { echo "❌ Snapshot $$BK is missing db.sql"; exit 1; }; \
+	grep -q "CREATE TABLE" $(BACKUP_DIR)/$$BK/db.sql || \
+	  { echo "❌ Snapshot $$BK has an empty/corrupt dump - refusing to restore (it would wipe the DB)."; exit 1; }; \
 	echo "♻️  Restoring snapshot: $$BK"; \
-	$(DB) mysql -u wordpress -pwordpress_password wordpress < $(BACKUP_DIR)/$$BK/db.sql 2>/dev/null; \
+	$(DB) mysql -u wordpress -pwordpress_password wordpress < $(BACKUP_DIR)/$$BK/db.sql || \
+	  { echo "❌ Restore failed"; exit 1; }; \
 	tar -xzf $(BACKUP_DIR)/$$BK/theme.tar.gz -C wp-content/themes; \
 	echo "✓ Restored DB + theme from $$BK"
 
