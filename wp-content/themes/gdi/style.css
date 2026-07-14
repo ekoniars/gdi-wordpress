@@ -18,12 +18,17 @@ Text Domain: gdi
   --text: #e8e6e0;
   --muted: #9a97a0;
   --radius: 18px;
+  /* Header is fixed, so .hero offsets itself by exactly this. One value keeps
+     the two from drifting apart. */
+  --header-h: 76px;
   --font: "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* scroll-padding: the header is fixed, so an anchor jump would otherwise land
+   with the section title hidden underneath it. */
+html { scroll-behavior: smooth; scroll-padding-block-start: var(--header-h); }
 
 body {
   background: var(--bg);
@@ -64,10 +69,13 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
 }
 .site-header .wrap {
   display: flex; align-items: center; justify-content: space-between;
-  block-size: 68px;
+  block-size: var(--header-h);
 }
 .logo { display: flex; align-items: center; }
-.logo-img { max-height: 56px; width: auto; filter: drop-shadow(0 0 12px #d4af3733); transition: filter 0.3s; }
+/* 44px inside a 76px bar leaves 16px of air top and bottom. The drop-shadow
+   bleeds past the image box, so the logo needs more clearance than its own
+   height suggests. */
+.logo-img { max-height: 44px; width: auto; filter: drop-shadow(0 0 12px #d4af3733); transition: filter 0.3s; }
 .site-header:hover .logo-img { filter: drop-shadow(0 0 20px #d4af3755); }
 .nav { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); }
 .nav a:hover { color: var(--gold-soft); }
@@ -81,7 +89,7 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
     radial-gradient(ellipse 70% 50% at 50% -10%, #d4af3722, transparent),
     radial-gradient(ellipse 40% 35% at 80% 90%, #3b2d7a2e, transparent),
     var(--bg);
-  margin-block-start: 68px;
+  margin-block-start: var(--header-h);
 }
 .hero h1 {
   font-size: clamp(2.4rem, 7vw, 5rem);

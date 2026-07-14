@@ -39,7 +39,14 @@ add_filter('robots_txt', function (): string {
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('gdi-font', 'https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap', [], null);
-    wp_enqueue_style('gdi', get_stylesheet_uri(), ['gdi-font'], wp_get_theme()->get('Version'));
+
+    // Version from the file's mtime, not the theme header: the header version
+    // never changes on deploy, so the CSS URL stayed identical and Cloudflare
+    // kept serving a stale copy for its full 4h TTL. mtime changes whenever the
+    // file actually changes, which is exactly when the cache should be busted.
+    $gdi_css = get_stylesheet_directory() . '/style.css';
+    $gdi_ver = file_exists($gdi_css) ? filemtime($gdi_css) : wp_get_theme()->get('Version');
+    wp_enqueue_style('gdi', get_stylesheet_uri(), ['gdi-font'], $gdi_ver);
 });
 
 /**
