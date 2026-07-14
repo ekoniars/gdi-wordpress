@@ -84,22 +84,22 @@ $gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
         <img src="<?php echo get_template_directory_uri(); ?>/images/alon-3.jpg" alt="אלון גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">א</div>
         <h3>אלון גולדברג <a class="linkedin-icon" href="https://www.linkedin.com/in/alon7/" target="_blank" rel="noopener noreferrer" aria-label="הפרופיל של אלון גולדברג בלינקדאין"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a></h3>
-        <div class="role">מנהל הפיתוח</div>
-        <p>13 שנים כבעלים טכני יחיד של פלטפורמת פרודקשן: ארכיטקטורה, QA אוטומטי ב-6 שכבות, DevOps, בסיסי נתונים ואבטחת מידע. מהנדס סניור אחד שמחליף צוות שלם - מתוגבר ב־AI.</p>
+        <div class="role">מנהל טכנולוגיות ראשי (CTO)</div>
+        <p>מוביל טכנולוגי עם מעל 13 שנות ניסיון כסמכות המקצועית הבלעדית מאחורי פלטפורמת פרודקשן מורכבת. מומחה בארכיטקטורת תוכנה, מערכות QA אוטומטיות ב-6 שכבות, DevOps, ניהול בסיסי נתונים ואבטחת מידע. מהנדס סניור בעל יכולות של צוות שלם, המשלב בעבודתו כלי AI מתקדמים.</p>
       </article>
       <article class="card reveal">
         <img src="<?php echo get_template_directory_uri(); ?>/images/eitan-4.jpg" alt="איתן קונירסקי" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">אק</div>
         <h3>איתן קונירסקי</h3>
-        <div class="role">מנהל פיתוח עסקי ושיווק</div>
-        <p>מחבר בין הטכנולוגיה לעסק: אסטרטגיה, שיווק ופיתוח עסקי שמייצרים הכנסות - קמפיינים, מנויים ואינטגרציות תשלום שמזיזים את המחוגים.</p>
+        <div class="role">מנהל פיתוח עסקי, שיווק ואסטרטגיה</div>
+        <p>הגשר המקשר בין פתרונות טכנולוגיים להצלחה עסקית. מוביל את מערך האסטרטגיה, השיווק והפיתוח העסקי ליצירת מנועי צמיחה והכנסות - החל מקמפיינים ממוקדים ומודלים של מנויים, ועד לאינטגרציות תשלום מתקדמות שמניעות את העסק קדימה.</p>
       </article>
       <article class="card reveal">
         <img src="<?php echo get_template_directory_uri(); ?>/images/einav-4.jpg" alt="עינב אהוד-גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">ע</div>
         <h3>עינב אהוד-גולדברג</h3>
-        <div class="role">מנהלת כספים ותפעול</div>
-        <p>דואגת שהכל קורה בזמן ובתקציב: תפעול, תיאום ובקרה שמבטיחים שכל פרויקט נסגר - ולא נגרר.</p>
+        <div class="role">מנהלת עסקית ותפעולית</div>
+        <p>מובילה את האסטרטגיה העסקית והניהול השוטף של החברה. אחראית על ניהול תזרים המזומנים, תשלומים וניהול כספים, לצד תיאום, תפעול ובקרה קפדנית המבטיחים שכל פרויקט מבוצע בזמן, במסגרת התקציב וללא קצוות פתוחים.</p>
       </article>
     </div>
   </div>
