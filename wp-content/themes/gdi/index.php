@@ -6,6 +6,32 @@
 <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon-32.png" sizes="32x32">
 <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/images/apple-touch-icon.png">
+
+<?php
+// Link preview (WhatsApp, Slack, iMessage, Facebook, LinkedIn...).
+// og:image must be an absolute URL - relative paths are silently ignored.
+// Bump ?v= when the card changes: WhatsApp caches previews aggressively.
+$gdi_og_title = 'G.D.I - מהנדס אחד במקום צוות שלם';
+$gdi_og_desc  = 'כל פרויקט, מינימום זמן ותקציב, בסטנדרט Gold. ארכיטקטורה, אבטחת מידע, בדיקות ותשתיות - הכל תחת קורת גג אחת.';
+$gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
+?>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="G.D.I">
+<meta property="og:title" content="<?php echo esc_attr($gdi_og_title); ?>">
+<meta property="og:description" content="<?php echo esc_attr($gdi_og_desc); ?>">
+<meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
+<meta property="og:image" content="<?php echo esc_url($gdi_og_image); ?>">
+<meta property="og:image:secure_url" content="<?php echo esc_url($gdi_og_image); ?>">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="<?php echo esc_attr($gdi_og_title); ?>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?php echo esc_attr($gdi_og_title); ?>">
+<meta name="twitter:description" content="<?php echo esc_attr($gdi_og_desc); ?>">
+<meta name="twitter:image" content="<?php echo esc_url($gdi_og_image); ?>">
+
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
