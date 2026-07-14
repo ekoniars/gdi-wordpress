@@ -133,7 +133,13 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px; text-align: center;
 }
-.stat b { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); display: block; }
+/* direction:ltr - the counter's text is number+suffix ("50x") or prefix+number
+   ("+600"). Those affixes are bidi-neutral/Latin, so in the RTL page they get
+   reordered to the wrong side ("x50"). The number is always an LTR construct. */
+.stat b {
+  font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); display: block;
+  direction: ltr; unicode-bidi: isolate;
+}
 .stat span { color: var(--muted); }
 
 /* ---------- Team ---------- */

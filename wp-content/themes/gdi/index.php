@@ -67,10 +67,10 @@ $gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
 
 <section class="stats">
   <div class="wrap">
-    <div class="stat reveal"><b data-count="6">0</b><span>תפקידים שאיש אחד מחליף -<br>ארכיטקט תוכנה, בדיקות, תשתיות, בסיסי נתונים, אבטחת מידע וניהול מוצר</span></div>
-    <div class="stat reveal"><b data-count="50" data-suffix="x">0</b><span>שיפור ביצועים בחיפוש - מ־6.8 שניות ל־133 אלפיות שנייה</span></div>
-    <div class="stat reveal"><b data-count="116">0</b><span>בדיקות אוטומטיות שמחליפות צוות בדיקות ידני במלואו</span></div>
-    <div class="stat reveal"><b data-count="0">0</b><span>זמן השבתה בפריסות -<br>מערכת Blue-Green סביב השעון</span></div>
+    <div class="stat reveal"><b data-count="6">0</b><span>צוותי בינה מלאכותית שאיש אחד מנהל -<br>כל צוות אחראי על צד קריטי אחר במערכת: ארכיטקטורה, בדיקות, תשתיות, בסיסי נתונים, אבטחת מידע ומוצר</span></div>
+    <div class="stat reveal"><b data-count="50" data-suffix="x">0</b><span>שיפור בביצועים - ממערכת שנתקעת תחת עומס למערכת שנטענת בחלקיק שנייה, בכל עומס</span></div>
+    <div class="stat reveal"><b data-count="600" data-prefix="+">0</b><span>בדיקות אוטומטיות שכתבתי ואני מתחזק - הן הכלי, הניסיון והשליטה בקוד הם מה שמחליף צוות שלם</span></div>
+    <div class="stat reveal"><b data-count="0">0</b><span>זמן השבתה בעדכונים -<br>האתר ממשיך לעבוד גם בזמן שמעלים גרסה חדשה</span></div>
   </div>
 </section>
 
@@ -78,14 +78,14 @@ $gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
   <div class="wrap">
     <p class="kicker reveal">הצוות</p>
     <h2 class="section-title reveal">שלושה אנשים. אחריות מלאה על הכל.</h2>
-    <p class="section-sub reveal">במקום צוות שלם של ספקים ותיאומים - צוות אחד קטן שלוקח בעלות מקצה לקצה: מהארכיטקטורה ועד השיווק.</p>
+    <p class="section-sub reveal">אנחנו לא מחליפים ספקים - אנחנו מייתרים את הצורך לנהל, לתאם ולשלם לכמה מהם. שישית מהמחיר, איכות גבוהה בהרבה, ואחריות אמיתית מקצה לקצה.</p>
     <div class="team-grid">
       <article class="card reveal">
         <img src="<?php echo get_template_directory_uri(); ?>/images/alon-3.jpg" alt="אלון גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">א</div>
         <h3>אלון גולדברג <a class="linkedin-icon" href="https://www.linkedin.com/in/alon7/" target="_blank" rel="noopener noreferrer" aria-label="הפרופיל של אלון גולדברג בלינקדאין"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a></h3>
         <div class="role">מנהל טכנולוגיות ראשי (CTO)</div>
-        <p>מוביל טכנולוגי עם מעל 13 שנות ניסיון כסמכות המקצועית הבלעדית מאחורי פלטפורמת פרודקשן מורכבת. מומחה בארכיטקטורת תוכנה, מערכות QA אוטומטיות ב-6 שכבות, DevOps, ניהול בסיסי נתונים ואבטחת מידע. מהנדס סניור בעל יכולות של צוות שלם, המשלב בעבודתו כלי AI מתקדמים.</p>
+        <p>מוביל טכנולוגי עם מעל 13 שנות ניסיון כסמכות המקצועית הבלעדית מאחורי פלטפורמת פרודקשן מורכבת. מומחה בארכיטקטורת תוכנה, הנדסת תשתיות ופריסה, תפעול מערכות של בדיקות אוטומטיות ב-6 שכבות, ניהול בסיסי נתונים והטמעת אבטחת מידע. מהנדס תוכנה בכיר בעל יכולות של צוות שלם מונחה בינה מלאכותית.</p>
       </article>
       <article class="card reveal">
         <img src="<?php echo get_template_directory_uri(); ?>/images/eitan-4.jpg" alt="איתן קונירסקי" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -173,14 +173,14 @@ $gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
         <div class="cap-role">במקום צוות בדיקות ידני</div>
         <div class="cap-body">
           <h3>6 שכבות של בדיקות אוטומטיות</h3>
-          <p>116 בדיקות אוטומאטיות שמחליפות צוות בדיקות ידני במלואו. כל שינוי נבדק לפני שהוא עולה - אפס רגרסיות מגיעות לסביבת ה-Production.</p>
+          <p>מעל 600 בדיקות אוטומטיות שנכתבו ומתוחזקות ביד - כל שינוי נבדק לפני שהוא עולה, ואפס תקלות מגיעות ללקוח. הבדיקות הן הכלי; מי שכותב ומנהל אותן הוא מה שמחליף צוות שלם.</p>
         </div>
       </article>
       <article class="cap reveal">
         <div class="cap-role">במקום איש תשתיות</div>
         <div class="cap-body">
           <h3>פריסות ללא השבתה</h3>
-          <p>מערכת Blue-Green על שרתים מאוזני עומס, עם חזרה אוטומטית לאחור בכל תקלה. זמינות מלאה סביב השעון.</p>
+          <p>גרסאות חדשות עולות בלי שהמשתמשים ירגישו - האתר ממשיך לעבוד רגיל תוך כדי. אם משהו משתבש, המערכת חוזרת אחורה מעצמה תוך שניות.</p>
         </div>
       </article>
       <article class="cap reveal">
@@ -321,12 +321,12 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   io.unobserve(e.target);
   const c = e.target.querySelector('[data-count]');
   if (c) {
-    const end = +c.dataset.count, suf = c.dataset.suffix || '';
+    const end = +c.dataset.count, suf = c.dataset.suffix || '', pre = c.dataset.prefix || '';
     let t0;
     const step = ts => {
       t0 ??= ts;
       const p = Math.min((ts - t0) / 1200, 1);
-      c.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
+      c.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
