@@ -163,6 +163,37 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
 .card .role { color: var(--gold); font-weight: 700; margin-block: 4px 14px; }
 .card p { color: var(--muted); font-size: 0.98rem; }
 
+/* ---------- Services (two-up) ---------- */
+/* ponytail: reuses .cap card styling, only the track differs */
+.svc-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 26px; margin-block-start: 50px;
+}
+/* One line on desktop; the max-inline-size still lets it wrap on narrow screens. */
+.svc-sub { max-inline-size: 75ch; text-wrap: balance; }
+/* row-reverse: puts the icon on the left of the title inside the RTL row. */
+.svc-head {
+  display: flex; flex-direction: row-reverse; justify-content: flex-end;
+  align-items: center; gap: 14px;
+  padding: 20px 24px;
+  background: #d4af370d;
+  border-block-end: 1px solid #d4af3722;
+}
+.svc-icon { flex: none; block-size: 30px; color: var(--gold); display: grid; place-items: center; }
+/* direction:ltr - the a→z glyphs and arrow are a Latin-order device; without
+   this the RTL page mirrors their layout and the "a" clips off the viewBox. */
+.svc-icon svg { block-size: 30px; inline-size: auto; direction: ltr; }
+.svc-num {
+  font-size: 1.6rem; font-weight: 800; letter-spacing: 0.01em;
+  color: var(--gold);
+}
+.svc-fit {
+  margin-block-start: 14px; padding-block-start: 14px;
+  border-block-start: 1px solid #ffffff14;
+  font-size: 0.9rem;
+}
+.svc-fit .highlight { color: var(--gold-soft); font-weight: 700; }
+
 /* ---------- Capabilities / products ---------- */
 .cap-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -236,14 +267,32 @@ h1, h2, h3 { font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
    direction from its first strong character (Unicode P2/P3), so a
    Latin-first name renders LTR regardless of the surrounding RTL page. */
 .skill-name { flex: 1; font-size: 0.95rem; color: var(--text); unicode-bidi: plaintext; }
-/* direction:ltr + isolate (not plaintext) - "~3" has no strong character for
-   plaintext's P2/P3 heuristic to anchor on (digits are bidi-weak, "~" is
-   neutral), so it falls back to the RTL paragraph and reorders to "3~".
-   These badges are always numeric-LTR by construction, so force it. */
 .skill-years {
   flex: none; font-size: 0.75rem; color: var(--muted);
-  font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
 }
+/* No bidi overrides needed: gdi_years_label() emits one all-Hebrew phrase
+   ("מעל 9 שנים"), so there is no stray neutral character to reorder. */
+
+/* ---------- WhatsApp floating button ---------- */
+.wa-fab {
+  /* physical `left`, not inset-inline-start: the page is RTL, so the logical
+     start edge is the right one - and the FAB belongs on the left. */
+  position: fixed; inset-block-end: 24px; left: 24px; z-index: 60;
+  inline-size: 56px; block-size: 56px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: #0d0b14;
+  background: linear-gradient(150deg, var(--gold-soft), var(--gold));
+  box-shadow: 0 8px 26px #00000088, 0 0 22px #d4af3744;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.wa-fab svg { inline-size: 30px; block-size: 30px; }
+.wa-fab:hover, .wa-fab:focus-visible {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 32px #000000aa, 0 0 30px #d4af3766;
+}
+@media (prefers-reduced-motion: reduce) { .wa-fab { transition: none; } }
 
 /* ---------- Final CTA ---------- */
 .final { text-align: center; }

@@ -1,7 +1,41 @@
 <?php
+/**
+ * WhatsApp number in international format, digits only (no +, no dashes).
+ * An Israeli mobile looks like 9725XXXXXXXX.
+ */
+const GDI_WHATSAPP = '4917687231982';
+
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
 });
+
+/**
+ * Pre-launch: keep the site out of search results entirely.
+ *
+ * Enforced in the theme, not just via the blog_public option, because the
+ * database is not part of the SFTP deploy - production would otherwise stay
+ * crawlable. Remove this whole block (and re-enable "Search engine visibility"
+ * in Settings > Reading) at launch.
+ *
+ * noindex is what actually keeps a page out of the results; robots.txt only
+ * asks crawlers not to fetch it, and a Disallow'd URL can still be listed if
+ * it is linked from somewhere else.
+ */
+add_action('wp_head', function () {
+    echo '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">' . "\n";
+}, 1);
+
+add_filter('wp_robots', function (array $robots): array {
+    return ['noindex' => true, 'nofollow' => true];
+}, 99);
+
+add_action('send_headers', function () {
+    header('X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex');
+});
+
+add_filter('robots_txt', function (): string {
+    return "User-agent: *\nDisallow: /\n";
+}, 99);
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('gdi-font', 'https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap', [], null);
@@ -37,79 +71,6 @@ function gdi_word_spans(string $text): string {
         $rendered_lines[] = implode(' ', $spans);
     }
     return sprintf('<span class="sec" style="--n:%d">%s</span>', max($n, 1), implode('<br>', $rendered_lines));
-}
-
-/**
- * Contact form handler. Runs before any HTML output so it can set
- * $GLOBALS['gdi_contact_result'] for index.php to render, and repopulate
- * fields on validation failure (never after success - the form should
- * look empty/used up once it worked).
- *
- * ponytail: no PHPUnit harness exists in this theme and the validation
- * here is a thin wrapper over WP core (sanitize_email, wp_verify_nonce,
- * wp_mail) - mocking all three for a unit test would be more scaffolding
- * than the form itself. Verified live instead: happy path, missing/invalid
- * email, and honeypot-filled were each submitted through the running site.
- */
-add_action('template_redirect', function () {
-    if (empty($_POST['gdi_contact_submit'])) {
-        return;
-    }
-
-    if (!isset($_POST['gdi_contact_nonce']) || !wp_verify_nonce($_POST['gdi_contact_nonce'], 'gdi_contact_form')) {
-        $GLOBALS['gdi_contact_result'] = ['ok' => false, 'msg' => 'האימות של הטופס פג. רעננו את הדף ונסו שוב.'];
-        return;
-    }
-
-    // Honeypot: hidden field a real visitor never sees or fills. A bot that
-    // fills every input trips it - report fake success so it moves on.
-    if (!empty($_POST['gdi_website'])) {
-        $GLOBALS['gdi_contact_result'] = ['ok' => true, 'msg' => 'תודה! נחזור אליכם בהקדם.'];
-        return;
-    }
-
-    $name  = sanitize_text_field(wp_unslash($_POST['gdi_name'] ?? ''));
-    $email = sanitize_email(wp_unslash($_POST['gdi_email'] ?? ''));
-    $phone = sanitize_text_field(wp_unslash($_POST['gdi_phone'] ?? ''));
-    $message = sanitize_textarea_field(wp_unslash($_POST['gdi_message'] ?? ''));
-
-    if (!$name || !$email || !is_email($email)) {
-        $GLOBALS['gdi_contact_result'] = ['ok' => false, 'msg' => 'נא למלא שם מלא ואימייל תקין.'];
-        return;
-    }
-
-    $to = 'eitank80@gmail.com';
-    $subject = sprintf('פנייה חדשה מהאתר - %s', $name);
-    $body = "שם: {$name}\nאימייל: {$email}\nטלפון: " . ($phone !== '' ? $phone : '-') . "\n\nהודעה:\n{$message}";
-    $host = parse_url(home_url(), PHP_URL_HOST) ?: 'gdi.dpdns.org';
-    $headers = [
-        'Content-Type: text/plain; charset=UTF-8',
-        // Sending "From" as the visitor's own address gets flagged as spoofing
-        // by most mail providers, since this server isn't authorized to send
-        // as gmail.com. Reply-To keeps replying-to-the-visitor a single click.
-        "From: G.D.I Website <no-reply@{$host}>",
-        "Reply-To: {$name} <{$email}>",
-    ];
-
-    $sent = wp_mail($to, $subject, $body, $headers);
-    $GLOBALS['gdi_contact_result'] = $sent
-        ? ['ok' => true, 'msg' => 'תודה! ההודעה נשלחה, נחזור אליכם בהקדם.']
-        : ['ok' => false, 'msg' => 'משהו השתבש בשליחה. אפשר לכתוב ישירות ל-eitank80@gmail.com.'];
-});
-
-/**
- * Repopulates a contact-form field after a failed submission only - a
- * successful submission should leave the form looking used up, not primed
- * for a duplicate send. $multiline uses esc_textarea (preserves newlines)
- * instead of esc_attr (would collapse them into one line).
- */
-function gdi_old_value(string $field, bool $multiline = false): string {
-    $result = $GLOBALS['gdi_contact_result'] ?? null;
-    if (!$result || $result['ok'] || !isset($_POST[$field])) {
-        return '';
-    }
-    $raw = wp_unslash($_POST[$field]);
-    return $multiline ? esc_textarea($raw) : esc_attr(sanitize_text_field($raw));
 }
 
 /**
@@ -183,6 +144,25 @@ function gdi_skill_icon(string $slug): string {
     );
 }
 
+/**
+ * Turns a raw years value ("9+", "~3", "6") into one all-Hebrew phrase.
+ *
+ * The trailing "+" and "~" are bidi-neutral characters. Left next to a digit
+ * at the boundary of an RTL paragraph they get reordered by the bidi algorithm
+ * and render on the wrong side ("שנים 9+" instead of "+9 שנים"). Moving the
+ * modifier into a leading Hebrew word ("מעל", "כ-") removes the neutral from
+ * the boundary entirely, so there is nothing left to reorder.
+ */
+function gdi_years_label(string $years): string {
+    if (str_ends_with($years, '+')) {
+        return 'מעל ' . rtrim($years, '+') . ' שנים';
+    }
+    if (str_starts_with($years, '~')) {
+        return 'כ-' . ltrim($years, '~') . ' שנים';
+    }
+    return $years . ' שנים';
+}
+
 /** Static content for the skills section: three labeled groups. */
 function gdi_skill_groups(): array {
     return [
@@ -232,7 +212,7 @@ function gdi_skill_groups(): array {
         ],
         'שירותים חיצוניים' => [
             ['name' => 'AWS: EC2, RDS, S3', 'icon' => 'GEN_cloud', 'years' => '7+'],
-            ['name' => 'AWS: DynamoDB, Lambda', 'icon' => 'GEN_cloud', 'years' => null],
+            ['name' => 'AWS: DynamoDB, Lambda', 'icon' => 'GEN_cloud', 'years' => '7+'],
             ['name' => 'Google Analytics', 'icon' => 'googleanalytics', 'years' => '7+'],
             ['name' => 'PushWoosh', 'icon' => 'GEN_bell', 'years' => '5+'],
             ['name' => 'Tranzila', 'icon' => 'GEN_card', 'years' => '7+'],
