@@ -95,7 +95,7 @@ $gdi_og_image = get_template_directory_uri() . '/images/og-image.png?v=1';
         <p>הגשר המקשר בין פתרונות טכנולוגיים להצלחה עסקית. מוביל את מערך האסטרטגיה, השיווק והפיתוח העסקי ליצירת מנועי צמיחה והכנסות - החל מקמפיינים ממוקדים ומודלים של מנויים, ועד לאינטגרציות תשלום מתקדמות שמניעות את העסק קדימה.</p>
       </article>
       <article class="card reveal">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/einav-4.jpg" alt="עינב אהוד-גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/einav-5.jpg" alt="עינב אהוד-גולדברג" class="avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="avatar" style="display:none;">ע</div>
         <h3>עינב אהוד-גולדברג</h3>
         <div class="role">מנהלת עסקית ותפעולית</div>
