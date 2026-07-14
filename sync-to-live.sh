@@ -26,7 +26,20 @@ if [ ! -d "$LOCAL" ]; then
 fi
 
 # put -r על תיקייה קיימת מעלה את התוכן פנימה. -p משמר זמני שינוי.
-sshpass -p "$PASSWORD" sftp -P "$PORT" "$HOST" <<EOF
+#
+# PreferredAuthentications=password + PubkeyAuthentication=no:
+#   בלעדיהם SSH מנסה קודם מפתח ציבורי, נכשל, ואז מבקש סיסמה שוב -
+#   ו-sshpass יודע להזין אותה רק פעם אחת. זה הגורם ל-Permission denied
+#   הכפול שראינו.
+# NumberOfPasswordPrompts=1: נכשל מיד במקום לבקש סיסמה בלולאה.
+sshpass -p "$PASSWORD" sftp \
+    -P "$PORT" \
+    -o PreferredAuthentications=password \
+    -o PubkeyAuthentication=no \
+    -o NumberOfPasswordPrompts=1 \
+    -o StrictHostKeyChecking=no \
+    -o ConnectTimeout=20 \
+    "$HOST" <<EOF
 cd $REMOTE_DIR
 put -rp $LOCAL/*
 bye
